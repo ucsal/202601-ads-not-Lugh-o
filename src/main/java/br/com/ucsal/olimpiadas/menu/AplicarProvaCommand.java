@@ -1,5 +1,6 @@
 package br.com.ucsal.olimpiadas.menu;
 
+import br.com.ucsal.olimpiadas.common.CommonUtils;
 import br.com.ucsal.olimpiadas.common.FenUtils;
 import br.com.ucsal.olimpiadas.common.ParticipanteUtils;
 import br.com.ucsal.olimpiadas.input.Input;
@@ -7,41 +8,53 @@ import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Questao;
 import br.com.ucsal.olimpiadas.model.Resposta;
 import br.com.ucsal.olimpiadas.model.Tentativa;
-import br.com.ucsal.olimpiadas.repository.Store;
+import br.com.ucsal.olimpiadas.repository.*;
 
 import java.util.List;
 
-import static br.com.ucsal.olimpiadas.common.CommonUtils.calcularNota;
-import static br.com.ucsal.olimpiadas.common.CommonUtils.escolherProva;
-
 public class AplicarProvaCommand extends MenuCommand {
-    private final Store repository;
+    private final ParticipanteRepository participanteRepository;
+    private final ProvaRepository provaRepository;
+    private final TentativaRepository tentativaRepository;
+    private final ParticipanteUtils participanteUtils;
+    private final QuestaoRepository questaoRepository;
+    private final CommonUtils commonUtils;
 
-    public AplicarProvaCommand(Store repository) {
+    public AplicarProvaCommand(
+            ParticipanteRepository participanteRepository,
+            ProvaRepository provaRepository,
+            TentativaRepository tentativaRepository,
+            QuestaoRepository questaoRepository
+    ) {
         super("Aplicar prova (selecionar participante + prova)");
-        this.repository = repository;
+        this.participanteRepository = participanteRepository;
+        this.provaRepository = provaRepository;
+        this.tentativaRepository = tentativaRepository;
+        this.questaoRepository = questaoRepository;
+        this.participanteUtils = new ParticipanteUtils(participanteRepository);
+        this.commonUtils = new CommonUtils(provaRepository);
     }
 
     @Override
     void executar(Input in) {
-        if (repository.getParticipantes().isEmpty()) {
+        if (participanteRepository.getLista().isEmpty()) {
             System.out.println("Cadastre participantes primeiro.");
             return;
         }
-        if (repository.getProvas().isEmpty()) {
+        if (provaRepository.getLista().isEmpty()) {
             System.out.println("Cadastre provas primeiro.");
             return;
         }
 
-        Long participanteId = ParticipanteUtils.escolherParticipante(in, repository);
+        Long participanteId = participanteUtils.escolherParticipante(in);
         if (participanteId == null) return;
 
-        Prova prova = escolherProva(in, repository);
+        Prova prova = commonUtils.escolherProva(in);
         if (prova == null) return;
 
         long provaId = prova.getId();
 
-        List<Questao> questoesDaProva = repository.getQuestoesPorProva(provaId);
+        List<Questao> questoesDaProva = questaoRepository.getQuestoesPorProva(provaId);
 
         if (questoesDaProva.isEmpty()) {
             System.out.println("Esta prova não possui questões cadastradas.");
@@ -49,7 +62,7 @@ public class AplicarProvaCommand extends MenuCommand {
         }
 
         Tentativa tentativa = new Tentativa.TentativaBuilder()
-                .id(repository.getProximaTentativaId())
+                .id(tentativaRepository.getProximoId())
                 .participanteId(participanteId)
                 .provaId(provaId)
                 .build();
@@ -87,9 +100,9 @@ public class AplicarProvaCommand extends MenuCommand {
             tentativa.adicionarResposta(r);
         }
 
-        repository.adicionarTentativa(tentativa);
+        tentativaRepository.adicionar(tentativa);
 
-        int nota = calcularNota(tentativa);
+        int nota = commonUtils.calcularNota(tentativa);
         System.out.println("\n--- Fim da Prova ---");
         System.out.println("Nota (acertos): " + nota + " / " + tentativa.getRespostas().size());
     }

@@ -2,14 +2,14 @@ package br.com.ucsal.olimpiadas.menu;
 
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;
-import br.com.ucsal.olimpiadas.repository.Store;
+import br.com.ucsal.olimpiadas.repository.ProvaRepository;
 
 public class CadastrarProvaCommand extends MenuCommand {
-    private final Store repository;
+    private final ProvaRepository provaRepository;
 
-    public CadastrarProvaCommand(Store repository) {
+    public CadastrarProvaCommand(ProvaRepository provaRepository) {
         super("Cadastrar prova");
-        this.repository = repository;
+        this.provaRepository = provaRepository;
     }
 
     @Override
@@ -18,10 +18,10 @@ public class CadastrarProvaCommand extends MenuCommand {
         String titulo = in.nextLine();
         try {
             Prova prova = new Prova.ProvaBuilder()
-                    .id(repository.getProximaProvaId())
+                    .id(provaRepository.getProximoId())
                     .titulo(titulo)
                     .build();
-            repository.adicionarProva(prova);
+            provaRepository.adicionar(prova);
             System.out.println("Prova criada: " + prova.getId());
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar prova: " + e.getMessage());

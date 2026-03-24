@@ -4,10 +4,16 @@ import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Resposta;
 import br.com.ucsal.olimpiadas.model.Tentativa;
-import br.com.ucsal.olimpiadas.repository.Store;
+import br.com.ucsal.olimpiadas.repository.ProvaRepository;
 
 public class CommonUtils {
-    public static int calcularNota(Tentativa tentativa) {
+    private final ProvaRepository provaRepository;
+
+    public CommonUtils(ProvaRepository provaRepository) {
+        this.provaRepository = provaRepository;
+    }
+
+    public int calcularNota(Tentativa tentativa) {
         int acertos = 0;
         for (Resposta r : tentativa.getRespostas()) {
             if (r.isCorreta()) acertos++;
@@ -15,9 +21,9 @@ public class CommonUtils {
         return acertos;
     }
 
-    public static Prova escolherProva(Input in, Store repository) {
+    public Prova escolherProva(Input in) {
         System.out.println("\nProvas:");
-        for (Prova p : repository.getProvas()) {
+        for (Prova p : provaRepository.getLista()) {
             System.out.printf("  %d) %s%n", p.getId(), p.getTitulo());
         }
         System.out.print("Escolha o id da prova: ");
@@ -25,7 +31,7 @@ public class CommonUtils {
         try {
             long id = Long.parseLong(in.nextLine());
 
-            for (Prova p : repository.getProvas()) {
+            for (Prova p : provaRepository.getLista()) {
                 if (p.getId() == id) {
                     return p;
                 }
