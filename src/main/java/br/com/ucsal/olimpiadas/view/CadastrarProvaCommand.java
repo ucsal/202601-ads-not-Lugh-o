@@ -1,4 +1,4 @@
-package br.com.ucsal.olimpiadas.menu;
+package br.com.ucsal.olimpiadas.view;
 
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;

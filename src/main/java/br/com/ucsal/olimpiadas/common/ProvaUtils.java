@@ -6,10 +6,10 @@ import br.com.ucsal.olimpiadas.model.Resposta;
 import br.com.ucsal.olimpiadas.model.Tentativa;
 import br.com.ucsal.olimpiadas.repository.ProvaRepository;
 
-public class CommonUtils {
+public class ProvaUtils {
     private final ProvaRepository provaRepository;
 
-    public CommonUtils(ProvaRepository provaRepository) {
+    public ProvaUtils(ProvaRepository provaRepository) {
         this.provaRepository = provaRepository;
     }
 

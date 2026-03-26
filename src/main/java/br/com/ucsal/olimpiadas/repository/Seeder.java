@@ -1,18 +1,28 @@
 package br.com.ucsal.olimpiadas.repository;
 
+import br.com.ucsal.olimpiadas.model.Participante;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Questao;
 
 public class Seeder {
     public final ProvaRepository provaRepository;
     public final QuestaoRepository questaoRepository;
+    public final ParticipanteRepository participanteRepository;
 
-    public Seeder(ProvaRepository provaRepository, QuestaoRepository questaoRepository) {
+    public Seeder(ProvaRepository provaRepository, QuestaoRepository questaoRepository, ParticipanteRepository participanteRepository) {
         this.provaRepository = provaRepository;
         this.questaoRepository = questaoRepository;
+        this.participanteRepository = participanteRepository;
     }
 
     public void seed() {
+        Participante participante = new Participante.ParticipanteBuilder()
+                .id(participanteRepository.getProximoId())
+                .nome("Lucas Falcão")
+                .email("email@email.com")
+                .build();
+        this.participanteRepository.adicionar(participante);
+
         Prova prova = new Prova.ProvaBuilder()
                 .id(provaRepository.getProximoId())
                 .titulo("Olimpíada 2026 • Nível 1 • Prova A")
