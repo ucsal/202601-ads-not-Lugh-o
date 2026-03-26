@@ -3,13 +3,16 @@ package br.com.ucsal.olimpiadas.repository;
 import br.com.ucsal.olimpiadas.model.Participante;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Questao;
+import br.com.ucsal.olimpiadas.repository.interfaces.IParticipanteRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IProvaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IQuestaoRepository;
 
 public class Seeder {
-    public final ProvaRepository provaRepository;
-    public final QuestaoRepository questaoRepository;
-    public final ParticipanteRepository participanteRepository;
+    public final IProvaRepository provaRepository;
+    public final IQuestaoRepository questaoRepository;
+    public final IParticipanteRepository participanteRepository;
 
-    public Seeder(ProvaRepository provaRepository, QuestaoRepository questaoRepository, ParticipanteRepository participanteRepository) {
+    public Seeder(IProvaRepository provaRepository, IQuestaoRepository questaoRepository, IParticipanteRepository participanteRepository) {
         this.provaRepository = provaRepository;
         this.questaoRepository = questaoRepository;
         this.participanteRepository = participanteRepository;

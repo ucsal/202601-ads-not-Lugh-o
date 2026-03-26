@@ -2,12 +2,12 @@ package br.com.ucsal.olimpiadas.view;
 
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Participante;
-import br.com.ucsal.olimpiadas.repository.ParticipanteRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IParticipanteRepository;
 
 public class CadastrarParticipanteCommand extends MenuCommand {
-    private final ParticipanteRepository participanteRepository;
+    private final IParticipanteRepository participanteRepository;
 
-    public CadastrarParticipanteCommand(ParticipanteRepository participanteRepository) {
+    public CadastrarParticipanteCommand(IParticipanteRepository participanteRepository) {
         super("Cadastrar participante");
         this.participanteRepository = participanteRepository;
     }

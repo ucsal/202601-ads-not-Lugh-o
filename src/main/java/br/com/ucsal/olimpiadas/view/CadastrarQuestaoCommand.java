@@ -4,15 +4,15 @@ import br.com.ucsal.olimpiadas.common.ProvaUtils;
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Questao;
-import br.com.ucsal.olimpiadas.repository.ProvaRepository;
-import br.com.ucsal.olimpiadas.repository.QuestaoRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IProvaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IQuestaoRepository;
 
 public class CadastrarQuestaoCommand extends MenuCommand {
-    private final ProvaRepository provaRepository;
-    private final QuestaoRepository questaoRepository;
+    private final IProvaRepository provaRepository;
+    private final IQuestaoRepository questaoRepository;
     private final ProvaUtils provaUtils;
 
-    public CadastrarQuestaoCommand(ProvaRepository provaRepository, QuestaoRepository questaoRepository) {
+    public CadastrarQuestaoCommand(IProvaRepository provaRepository, IQuestaoRepository questaoRepository) {
         super("Cadastrar questão (A–E) em uma prova");
         this.provaRepository = provaRepository;
         this.questaoRepository = questaoRepository;

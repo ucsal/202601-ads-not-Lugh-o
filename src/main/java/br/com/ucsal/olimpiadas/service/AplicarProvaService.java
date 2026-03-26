@@ -5,19 +5,18 @@ import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Questao;
 import br.com.ucsal.olimpiadas.model.Resposta;
 import br.com.ucsal.olimpiadas.model.Tentativa;
-import br.com.ucsal.olimpiadas.repository.QuestaoRepository;
-import br.com.ucsal.olimpiadas.repository.TentativaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IQuestaoRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.ITentativaRepository;
 
 import java.util.List;
 
 public class AplicarProvaService {
-
-    private final QuestaoRepository questaoRepository;
-    private final TentativaRepository tentativaRepository;
+    private final IQuestaoRepository questaoRepository;
+    private final ITentativaRepository tentativaRepository;
 
     public AplicarProvaService(
-            QuestaoRepository questaoRepository,
-            TentativaRepository tentativaRepository
+            IQuestaoRepository questaoRepository,
+            ITentativaRepository tentativaRepository
     ) {
         this.questaoRepository = questaoRepository;
         this.tentativaRepository = tentativaRepository;

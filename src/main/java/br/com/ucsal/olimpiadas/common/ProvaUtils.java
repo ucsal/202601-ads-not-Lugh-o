@@ -4,12 +4,12 @@ import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Resposta;
 import br.com.ucsal.olimpiadas.model.Tentativa;
-import br.com.ucsal.olimpiadas.repository.ProvaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IProvaRepository;
 
 public class ProvaUtils {
-    private final ProvaRepository provaRepository;
+    private final IProvaRepository provaRepository;
 
-    public ProvaUtils(ProvaRepository provaRepository) {
+    public ProvaUtils(IProvaRepository provaRepository) {
         this.provaRepository = provaRepository;
     }
 

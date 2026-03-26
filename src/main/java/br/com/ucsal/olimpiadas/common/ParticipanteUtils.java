@@ -2,12 +2,12 @@ package br.com.ucsal.olimpiadas.common;
 
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Participante;
-import br.com.ucsal.olimpiadas.repository.ParticipanteRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IParticipanteRepository;
 
 public class ParticipanteUtils {
-    public final ParticipanteRepository participanteRepository;
+    public final IParticipanteRepository participanteRepository;
 
-    public ParticipanteUtils(ParticipanteRepository participanteRepository) {
+    public ParticipanteUtils(IParticipanteRepository participanteRepository) {
         this.participanteRepository = participanteRepository;
     }
 

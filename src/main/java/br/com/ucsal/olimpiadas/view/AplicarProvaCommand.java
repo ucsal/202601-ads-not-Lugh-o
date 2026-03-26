@@ -5,24 +5,24 @@ import br.com.ucsal.olimpiadas.common.ProvaUtils;
 import br.com.ucsal.olimpiadas.input.Input;
 import br.com.ucsal.olimpiadas.model.Prova;
 import br.com.ucsal.olimpiadas.model.Tentativa;
-import br.com.ucsal.olimpiadas.repository.ParticipanteRepository;
-import br.com.ucsal.olimpiadas.repository.ProvaRepository;
-import br.com.ucsal.olimpiadas.repository.QuestaoRepository;
-import br.com.ucsal.olimpiadas.repository.TentativaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IParticipanteRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IProvaRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.IQuestaoRepository;
+import br.com.ucsal.olimpiadas.repository.interfaces.ITentativaRepository;
 import br.com.ucsal.olimpiadas.service.AplicarProvaService;
 
 public class AplicarProvaCommand extends MenuCommand {
-    private final ParticipanteRepository participanteRepository;
-    private final ProvaRepository provaRepository;
+    private final IParticipanteRepository participanteRepository;
+    private final IProvaRepository provaRepository;
     private final ParticipanteUtils participanteUtils;
     private final ProvaUtils provaUtils;
     private final AplicarProvaService aplicarProvaService;
 
     public AplicarProvaCommand(
-            ParticipanteRepository participanteRepository,
-            ProvaRepository provaRepository,
-            TentativaRepository tentativaRepository,
-            QuestaoRepository questaoRepository
+            IParticipanteRepository participanteRepository,
+            IProvaRepository provaRepository,
+            ITentativaRepository tentativaRepository,
+            IQuestaoRepository questaoRepository
     ) {
         super("Aplicar prova (selecionar participante + prova)");
         this.participanteRepository = participanteRepository;

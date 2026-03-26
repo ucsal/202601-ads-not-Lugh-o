@@ -1,10 +1,12 @@
 package br.com.ucsal.olimpiadas.repository;
 
+import br.com.ucsal.olimpiadas.repository.interfaces.IRepository;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class Repository<T> {
+public abstract class Repository<T> implements IRepository<T> {
     private long proximoId = 1;
     private final List<T> lista = new ArrayList<>();
 
